@@ -18,11 +18,11 @@ services:
     ports:
       - "3306:3306"     
   
-  php:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: carlosdiegodev/php
+    image: app
     #entrypoint: "php index.php"
     container_name: php
     tty: true
