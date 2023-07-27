@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  #Subir instancia do mysql
+  mysql:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: mysql
+    #restart: always
+    tty: true
+    #volumes:
+    #  - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=newfinance
+      - MYSQL_ROOT_PASSWORD=root      
+    networks:
+      - newfinance
+    ports:
+      - "3306:3306"     
+  
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: carlosdiegodev/php
+    #entrypoint: "php index.php"
+    container_name: php
+    tty: true
+    networks:
+      - newfinance
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+
+networks:
+  newfinance:
+    driver: bridge
+  
