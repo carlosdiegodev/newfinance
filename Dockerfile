@@ -19,6 +19,5 @@ COPY . .
 
 RUN chown -R www-data:www-data /var/www/html
 
-#COPY . .
-
 #ENTRYPOINT [ "php", "index.php" ]
+#CMD ["apache2-foreground"]
